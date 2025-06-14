@@ -26,6 +26,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/validate-token").permitAll()
                         .requestMatchers("/api/password/reset").permitAll() // Allow public access to password reset
                         .requestMatchers("/send-email").permitAll()
+                        .requestMatchers("/api/products/**").permitAll()
+                        .requestMatchers("/api/categories/**").permitAll()
                         .requestMatchers("/verify-otp").permitAll()
                         .requestMatchers("/login/**").permitAll()
                         .requestMatchers("/upload/**").permitAll()
@@ -49,8 +51,10 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:4200"); 
+        config.addAllowedOrigin("http://130.78.91.89:8085");
         config.addAllowedOrigin("http://localhost:8100"); 
         config.addAllowedOrigin("http://localhost:51581");// Allow specific origin (replace with your frontend URL)
+        config.addAllowedOriginPattern("*");
         config.addAllowedMethod("*"); // Allow all HTTP methods
         config.addAllowedHeader("*"); // Allow all headers
         config.setAllowCredentials(true); // Allow credentials
@@ -61,9 +65,11 @@ public class SecurityConfig {
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:4200"); // Allow specific origin (replace with your frontend URL)
+        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("http://130.78.91.89:8085");// Allow specific origin (replace with your frontend URL)
         config.addAllowedOrigin("http://localhost:8100"); 
         config.addAllowedOrigin("http://localhost:51581");
+        config.addAllowedOriginPattern("*");
         config.addAllowedMethod("*"); // Allow all HTTP methods
         config.addAllowedHeader("*"); // Allow all headers
         config.setAllowCredentials(true); // Allow credentials
